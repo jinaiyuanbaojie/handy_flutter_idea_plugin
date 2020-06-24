@@ -1,0 +1,57 @@
+<idea-plugin>
+    <id>org.jinaiyuanbaojie.com.flutter.plugin.utils</id>
+    <name>handy flutter</name>
+    <vendor email="jinaiyuanbaojie@163.com" url="https://github.com/jinaiyuanbaojie">My Github Page</vendor>
+
+    <description>Manage your flutter project more easily.</description>
+
+    <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+    </extensions>
+
+    <actions>
+        <group id="com.handy.flutter.utils" text="Flutter" description="Manage your flutter project more easily">
+            <add-to-group group-id="MainMenu" anchor="last"/>
+            <!--build runner-->
+            <action id="format" class="com.flutter.utils.actions.flutter.FormatAction" text="Format"
+                    description="Format codes under ./lib directory"/>
+            <action id="clean" class="com.flutter.utils.actions.flutter.FlutterCleanAction" text="Clean"
+                    description="Format codes under ./lib directory"/>
+            <action id="pub_get" class="com.flutter.utils.actions.flutter.PubGetAction" text="Pub Get"
+                    description="Update pub third party projects"/>
+
+            <!--flutter project-->
+            <action id="build_runner_build" class="com.flutter.utils.actions.buildrunner.BuildRunnerAction"
+                    text="BuildRunner build"
+                    description="Generate code which control by build_runner"/>
+            <action id="build_runner_clean" class="com.flutter.utils.actions.buildrunner.BuildRunnerCleanAction"
+                    text="BuildRunner clean"
+                    description="Clean the generate codes which control by build_runner"/>
+            <action id="build_runner_rebuild" class="com.flutter.utils.actions.buildrunner.BuildRunnerRebuildAction"
+                    text="BuildRunner rebuild"
+                    description="Rebuild the codes which control by build_runner"/>
+
+            <!--android project-->
+            <action id="uninstall_apk" class="com.flutter.utils.actions.android.UnInstallApkAction" text="Uninstall apk"
+                    description="Uninstall the android app on the debug device."/>
+            <action id="android_clean" class="com.flutter.utils.actions.android.CleanAndroidProjectAction"
+                    text="Clean android"
+                    description="Clean android project."/>
+            <action id="android_release" class="com.flutter.utils.actions.android.GenerateApkAction"
+                    text="Release android"
+                    description="Release android apk."/>
+
+            <!--iOS project-->
+            <action id="ios_clean" class="com.flutter.utils.actions.ios.CleaniOSProjectAction"
+                    text="Clean iOS"
+                    description="Clean iOS project."/>
+            <action id="pod_install" class="com.flutter.utils.actions.ios.PodInstallAction"
+                    text="Pod install"
+                    description="Install iOS third party project."/>
+        </group>
+    </actions>
+</idea-plugin>
