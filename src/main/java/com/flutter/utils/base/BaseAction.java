@@ -12,12 +12,12 @@ public abstract class BaseAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
         String command = getCommand(e);
-        File file = getProjectRootFile(e);
+        File file = getCommandWorkingDirectory(e);
         try {
             Process process = Runtime.getRuntime().exec(command, null, file);
             printLog(process);
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
     }
 
@@ -28,6 +28,19 @@ public abstract class BaseAction extends AnAction {
      * @return the command which will be executed.
      */
     public abstract String getCommand(AnActionEvent e);
+
+    public File getCommandWorkingDirectory(AnActionEvent e) {
+        File file = getCustomWorkingDirectory(e);
+        if (file == null) {
+            return getProjectRootFile(e);
+        } else {
+            return file;
+        }
+    }
+
+    public File getCustomWorkingDirectory(AnActionEvent e) {
+        return null;
+    }
 
     public String getProjectRootPath(AnActionEvent e) {
         return Objects.requireNonNull(e.getProject()).getBasePath();
